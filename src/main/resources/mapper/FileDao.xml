@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.xchuiao.ppms.dao.FileDao">
+<!--ColumnInfo(obj=column:file_id, name=fileId, comment=null, type=java.lang.Long, shortType=Long, custom=false, ext={sqlType=bigint, jdbcType=INTEGER})-->
+    <resultMap type="top.xchuiao.ppms.entity.File" id="FileMap">
+        <result property="fileId" column="file_id" jdbcType="INTEGER"/>
+        <result property="subId" column="sub_id" jdbcType="INTEGER"/>
+        <result property="fileName" column="file_name" jdbcType="VARCHAR"/>
+        <result property="fileRealName" column="file_real_name" jdbcType="VARCHAR"/>
+        <result property="fileType" column="file_type" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FileMap">
+        select
+          file_id, sub_id, file_name, file_real_name, file_type
+        from project_procedure_ms.file
+        where file_id = #{fileId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="FileMap">
+        select
+          file_id, sub_id, file_name, file_real_name, file_type
+        from project_procedure_ms.file
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="FileMap">
+        select
+          file_id, sub_id, file_name, file_real_name, file_type
+        from project_procedure_ms.file
+        <where>
+            <if test="fileId != null">
+                and file_id = #{fileId}
+            </if>
+            <if test="subId != null">
+                and sub_id = #{subId}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="fileRealName != null and fileRealName != ''">
+                and file_real_name = #{fileRealName}
+            </if>
+            <if test="fileType != null">
+                and file_type = #{fileType}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="fileId" useGeneratedKeys="true">
+        insert into project_procedure_ms.file(sub_id, file_name, file_real_name, file_type)
+        values (#{subId}, #{fileName}, #{fileRealName}, #{fileType})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project_procedure_ms.file
+        <set>
+            <if test="subId != null">
+                sub_id = #{subId},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                file_name = #{fileName},
+            </if>
+            <if test="fileRealName != null and fileRealName != ''">
+                file_real_name = #{fileRealName},
+            </if>
+            <if test="fileType != null">
+                file_type = #{fileType},
+            </if>
+        </set>
+        where file_id = #{fileId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from project_procedure_ms.file where file_id = #{fileId}
+    </delete>
+
+</mapper>

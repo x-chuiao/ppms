@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.xchuiao.ppms.dao.RoleDao">
+<!--ColumnInfo(obj=column:rol_id, name=rolId, comment=null, type=java.lang.Integer, shortType=Integer, custom=false, ext={sqlType=int, jdbcType=INTEGER})-->
+    <resultMap type="top.xchuiao.ppms.entity.Role" id="RoleMap">
+        <result property="rolId" column="rol_id" jdbcType="INTEGER"/>
+        <result property="rolName" column="rol_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RoleMap">
+        select
+          rol_id, rol_name
+        from project_procedure_ms.role
+        where rol_id = #{rolId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RoleMap">
+        select
+          rol_id, rol_name
+        from project_procedure_ms.role
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="RoleMap">
+        select
+          rol_id, rol_name
+        from project_procedure_ms.role
+        <where>
+            <if test="rolId != null">
+                and rol_id = #{rolId}
+            </if>
+            <if test="rolName != null and rolName != ''">
+                and rol_name = #{rolName}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="rolId" useGeneratedKeys="true">
+        insert into project_procedure_ms.role(rol_name)
+        values (#{rolName})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project_procedure_ms.role
+        <set>
+            <if test="rolName != null and rolName != ''">
+                rol_name = #{rolName},
+            </if>
+        </set>
+        where rol_id = #{rolId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from project_procedure_ms.role where rol_id = #{rolId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.xchuiao.ppms.dao.ClientDao">
+<!--ColumnInfo(obj=column:cli_id, name=cliId, comment=null, type=java.lang.Long, shortType=Long, custom=false, ext={sqlType=bigint, jdbcType=INTEGER})-->
+    <resultMap type="top.xchuiao.ppms.entity.Client" id="ClientMap">
+        <result property="cliId" column="cli_id" jdbcType="INTEGER"/>
+        <result property="accId" column="acc_id" jdbcType="INTEGER"/>
+        <result property="cliName" column="cli_name" jdbcType="VARCHAR"/>
+        <result property="cliSex" column="cli_sex" jdbcType="INTEGER"/>
+        <result property="cliContact" column="cli_contact" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ClientMap">
+        select
+          cli_id, acc_id, cli_name, cli_sex, cli_contact
+        from project_procedure_ms.client
+        where cli_id = #{cliId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ClientMap">
+        select
+          cli_id, acc_id, cli_name, cli_sex, cli_contact
+        from project_procedure_ms.client
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ClientMap">
+        select
+          cli_id, acc_id, cli_name, cli_sex, cli_contact
+        from project_procedure_ms.client
+        <where>
+            <if test="cliId != null">
+                and cli_id = #{cliId}
+            </if>
+            <if test="accId != null">
+                and acc_id = #{accId}
+            </if>
+            <if test="cliName != null and cliName != ''">
+                and cli_name = #{cliName}
+            </if>
+            <if test="cliSex != null">
+                and cli_sex = #{cliSex}
+            </if>
+            <if test="cliContact != null and cliContact != ''">
+                and cli_contact = #{cliContact}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="cliId" useGeneratedKeys="true">
+        insert into project_procedure_ms.client(acc_id, cli_name, cli_sex, cli_contact)
+        values (#{accId}, #{cliName}, #{cliSex}, #{cliContact})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project_procedure_ms.client
+        <set>
+            <if test="accId != null">
+                acc_id = #{accId},
+            </if>
+            <if test="cliName != null and cliName != ''">
+                cli_name = #{cliName},
+            </if>
+            <if test="cliSex != null">
+                cli_sex = #{cliSex},
+            </if>
+            <if test="cliContact != null and cliContact != ''">
+                cli_contact = #{cliContact},
+            </if>
+        </set>
+        where cli_id = #{cliId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from project_procedure_ms.client where cli_id = #{cliId}
+    </delete>
+
+</mapper>

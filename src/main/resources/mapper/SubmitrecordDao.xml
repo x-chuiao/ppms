@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.xchuiao.ppms.dao.SubmitrecordDao">
+<!--ColumnInfo(obj=column:sub_id, name=subId, comment=null, type=java.lang.Long, shortType=Long, custom=false, ext={sqlType=bigint, jdbcType=INTEGER})-->
+    <resultMap type="top.xchuiao.ppms.entity.Submitrecord" id="SubmitrecordMap">
+        <result property="subId" column="sub_id" jdbcType="INTEGER"/>
+        <result property="proId" column="pro_id" jdbcType="INTEGER"/>
+        <result property="staId" column="sta_id" jdbcType="INTEGER"/>
+        <result property="subIntro" column="sub_intro" jdbcType="VARCHAR"/>
+        <result property="submitTime" column="submit_time" jdbcType="TIMESTAMP"/>
+        <result property="directorAudit" column="director_audit" jdbcType="INTEGER"/>
+        <result property="directorComment" column="director_comment" jdbcType="VARCHAR"/>
+        <result property="clientComment" column="client_comment" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SubmitrecordMap">
+        select
+          sub_id, pro_id, sta_id, sub_intro, submit_time, director_audit, director_comment, client_comment
+        from project_procedure_ms.submitrecord
+        where sub_id = #{subId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SubmitrecordMap">
+        select
+          sub_id, pro_id, sta_id, sub_intro, submit_time, director_audit, director_comment, client_comment
+        from project_procedure_ms.submitrecord
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SubmitrecordMap">
+        select
+          sub_id, pro_id, sta_id, sub_intro, submit_time, director_audit, director_comment, client_comment
+        from project_procedure_ms.submitrecord
+        <where>
+            <if test="subId != null">
+                and sub_id = #{subId}
+            </if>
+            <if test="proId != null">
+                and pro_id = #{proId}
+            </if>
+            <if test="staId != null">
+                and sta_id = #{staId}
+            </if>
+            <if test="subIntro != null and subIntro != ''">
+                and sub_intro = #{subIntro}
+            </if>
+            <if test="submitTime != null">
+                and submit_time = #{submitTime}
+            </if>
+            <if test="directorAudit != null">
+                and director_audit = #{directorAudit}
+            </if>
+            <if test="directorComment != null and directorComment != ''">
+                and director_comment = #{directorComment}
+            </if>
+            <if test="clientComment != null and clientComment != ''">
+                and client_comment = #{clientComment}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="subId" useGeneratedKeys="true">
+        insert into project_procedure_ms.submitrecord(pro_id, sta_id, sub_intro, submit_time, director_audit, director_comment, client_comment)
+        values (#{proId}, #{staId}, #{subIntro}, #{submitTime}, #{directorAudit}, #{directorComment}, #{clientComment})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project_procedure_ms.submitrecord
+        <set>
+            <if test="proId != null">
+                pro_id = #{proId},
+            </if>
+            <if test="staId != null">
+                sta_id = #{staId},
+            </if>
+            <if test="subIntro != null and subIntro != ''">
+                sub_intro = #{subIntro},
+            </if>
+            <if test="submitTime != null">
+                submit_time = #{submitTime},
+            </if>
+            <if test="directorAudit != null">
+                director_audit = #{directorAudit},
+            </if>
+            <if test="directorComment != null and directorComment != ''">
+                director_comment = #{directorComment},
+            </if>
+            <if test="clientComment != null and clientComment != ''">
+                client_comment = #{clientComment},
+            </if>
+        </set>
+        where sub_id = #{subId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from project_procedure_ms.submitrecord where sub_id = #{subId}
+    </delete>
+
+</mapper>

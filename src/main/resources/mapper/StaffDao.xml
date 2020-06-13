@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.xchuiao.ppms.dao.StaffDao">
+<!--ColumnInfo(obj=column:sta_id, name=staId, comment=null, type=java.lang.Long, shortType=Long, custom=false, ext={sqlType=bigint, jdbcType=INTEGER})-->
+    <resultMap type="top.xchuiao.ppms.entity.Staff" id="StaffMap">
+        <result property="staId" column="sta_id" jdbcType="INTEGER"/>
+        <result property="posId" column="pos_id" jdbcType="INTEGER"/>
+        <result property="depId" column="dep_id" jdbcType="INTEGER"/>
+        <result property="accId" column="acc_id" jdbcType="INTEGER"/>
+        <result property="staName" column="sta_name" jdbcType="VARCHAR"/>
+        <result property="staAge" column="sta_age" jdbcType="INTEGER"/>
+        <result property="staSex" column="sta_sex" jdbcType="INTEGER"/>
+        <result property="staContact" column="sta_contact" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StaffMap">
+        select
+          sta_id, pos_id, dep_id, acc_id, sta_name, sta_age, sta_sex, sta_contact
+        from project_procedure_ms.staff
+        where sta_id = #{staId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StaffMap">
+        select
+          sta_id, pos_id, dep_id, acc_id, sta_name, sta_age, sta_sex, sta_contact
+        from project_procedure_ms.staff
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StaffMap">
+        select
+          sta_id, pos_id, dep_id, acc_id, sta_name, sta_age, sta_sex, sta_contact
+        from project_procedure_ms.staff
+        <where>
+            <if test="staId != null">
+                and sta_id = #{staId}
+            </if>
+            <if test="posId != null">
+                and pos_id = #{posId}
+            </if>
+            <if test="depId != null">
+                and dep_id = #{depId}
+            </if>
+            <if test="accId != null">
+                and acc_id = #{accId}
+            </if>
+            <if test="staName != null and staName != ''">
+                and sta_name = #{staName}
+            </if>
+            <if test="staAge != null">
+                and sta_age = #{staAge}
+            </if>
+            <if test="staSex != null">
+                and sta_sex = #{staSex}
+            </if>
+            <if test="staContact != null and staContact != ''">
+                and sta_contact = #{staContact}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="staId" useGeneratedKeys="true">
+        insert into project_procedure_ms.staff(pos_id, dep_id, acc_id, sta_name, sta_age, sta_sex, sta_contact)
+        values (#{posId}, #{depId}, #{accId}, #{staName}, #{staAge}, #{staSex}, #{staContact})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project_procedure_ms.staff
+        <set>
+            <if test="posId != null">
+                pos_id = #{posId},
+            </if>
+            <if test="depId != null">
+                dep_id = #{depId},
+            </if>
+            <if test="accId != null">
+                acc_id = #{accId},
+            </if>
+            <if test="staName != null and staName != ''">
+                sta_name = #{staName},
+            </if>
+            <if test="staAge != null">
+                sta_age = #{staAge},
+            </if>
+            <if test="staSex != null">
+                sta_sex = #{staSex},
+            </if>
+            <if test="staContact != null and staContact != ''">
+                sta_contact = #{staContact},
+            </if>
+        </set>
+        where sta_id = #{staId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from project_procedure_ms.staff where sta_id = #{staId}
+    </delete>
+
+</mapper>

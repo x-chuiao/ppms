@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.xchuiao.ppms.dao.PositionDao">
+<!--ColumnInfo(obj=column:pos_id, name=posId, comment=null, type=java.lang.Integer, shortType=Integer, custom=false, ext={sqlType=int, jdbcType=INTEGER})-->
+    <resultMap type="top.xchuiao.ppms.entity.Position" id="PositionMap">
+        <result property="posId" column="pos_id" jdbcType="INTEGER"/>
+        <result property="posName" column="pos_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PositionMap">
+        select
+          pos_id, pos_name
+        from project_procedure_ms.position
+        where pos_id = #{posId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PositionMap">
+        select
+          pos_id, pos_name
+        from project_procedure_ms.position
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="PositionMap">
+        select
+          pos_id, pos_name
+        from project_procedure_ms.position
+        <where>
+            <if test="posId != null">
+                and pos_id = #{posId}
+            </if>
+            <if test="posName != null and posName != ''">
+                and pos_name = #{posName}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="posId" useGeneratedKeys="true">
+        insert into project_procedure_ms.position(pos_name)
+        values (#{posName})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project_procedure_ms.position
+        <set>
+            <if test="posName != null and posName != ''">
+                pos_name = #{posName},
+            </if>
+        </set>
+        where pos_id = #{posId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from project_procedure_ms.position where pos_id = #{posId}
+    </delete>
+
+</mapper>
