@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Projectmember)表服务实现类
@@ -75,5 +76,20 @@ public class ProjectmemberServiceImpl implements ProjectmemberService {
     @Override
     public boolean deleteById(Long proId) {
         return this.projectmemberDao.deleteById(proId) > 0;
+    }
+
+    @Override
+    public List<Projectmember> queryAll(Projectmember projectmember) {
+        return this.projectmemberDao.queryAll(projectmember);
+    }
+
+    @Override
+    public List<Projectmember> queryAllPmember(long id) {
+        return this.projectmemberDao.queryAllPmember(id);
+    }
+
+    @Override
+    public List<Map<String,Object>> queryAllByDepId(Long depId) {
+        return this.projectmemberDao.queryAllByDepId(depId);
     }
 }

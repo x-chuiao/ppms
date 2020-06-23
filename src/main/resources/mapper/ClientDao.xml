@@ -31,23 +31,13 @@
         select
           cli_id, acc_id, cli_name, cli_sex, cli_contact
         from project_procedure_ms.client
-        <where>
-            <if test="cliId != null">
-                and cli_id = #{cliId}
-            </if>
-            <if test="accId != null">
-                and acc_id = #{accId}
-            </if>
-            <if test="cliName != null and cliName != ''">
-                and cli_name = #{cliName}
-            </if>
-            <if test="cliSex != null">
-                and cli_sex = #{cliSex}
-            </if>
-            <if test="cliContact != null and cliContact != ''">
-                and cli_contact = #{cliContact}
-            </if>
-        </where>
+    </select>
+
+    <select id="queryByAccId" resultMap="ClientMap">
+        select
+          cli_id, acc_id, cli_name, cli_sex, cli_contact
+        from project_procedure_ms.client
+        where acc_id = #{accId}
     </select>
 
     <!--新增所有列-->

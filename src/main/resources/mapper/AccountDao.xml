@@ -30,20 +30,6 @@
         select
           acc_id, rol_id, acc_pwd, acc_type
         from project_procedure_ms.account
-        <where>
-            <if test="accId != null">
-                and acc_id = #{accId}
-            </if>
-            <if test="rolId != null">
-                and rol_id = #{rolId}
-            </if>
-            <if test="accPwd != null and accPwd != ''">
-                and acc_pwd = #{accPwd}
-            </if>
-            <if test="accType != null">
-                and acc_type = #{accType}
-            </if>
-        </where>
     </select>
 
     <!--新增所有列-->

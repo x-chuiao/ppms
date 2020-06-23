@@ -52,4 +52,5 @@ public interface StaffService {
      */
     boolean deleteById(Long staId);
 
+    List<Staff> queryAllS();
 }

@@ -54,6 +54,23 @@
         </where>
     </select>
 
+    <select id="queryAllByProIds" resultMap="ProjectMap">
+        select
+        pro_id, cli_id, pro_name, pro_setup_time, pro_intro, pro_state
+        from project_procedure_ms.project
+        WHERE pro_id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="queryAllByCliId" resultMap="ProjectMap">
+        select
+        pro_id, cli_id, pro_name, pro_setup_time, pro_intro, pro_state
+        from project_procedure_ms.project
+        WHERE cli_id =#{cliId}
+    </select>
+
     <!--新增所有列-->
     <insert id="insert" keyProperty="proId" useGeneratedKeys="true">
         insert into project_procedure_ms.project(cli_id, pro_name, pro_setup_time, pro_intro, pro_state)

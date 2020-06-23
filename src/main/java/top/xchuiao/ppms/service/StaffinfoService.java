@@ -1,5 +1,6 @@
 package top.xchuiao.ppms.service;
 
+import top.xchuiao.ppms.entity.Staff;
 import top.xchuiao.ppms.entity.Staffinfo;
 import java.util.List;
 
@@ -17,8 +18,9 @@ public interface StaffinfoService {
      * @param  主键
      * @return 实例对象
      */
-    Staffinfo queryById( );
-
+    Staffinfo queryById();
+    Staffinfo queryByAccId(long accId);
+    List<Staffinfo> queryAll(Staffinfo staffinfo);
     /**
      * 查询多条数据
      *
@@ -50,6 +52,6 @@ public interface StaffinfoService {
      * @param  主键
      * @return 是否成功
      */
-    boolean deleteById( );
+    boolean deleteById(Long staId);
 
 }

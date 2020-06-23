@@ -16,9 +16,10 @@ public interface StaffinfoDao {
      * 通过ID查询单条数据
      *
      * @param  主键
+     * @param accId
      * @return 实例对象
      */
-    Staffinfo queryById( );
+    Staffinfo queryById();
 
     /**
      * 查询指定行数据
@@ -60,6 +61,7 @@ public interface StaffinfoDao {
      * @param  主键
      * @return 影响行数
      */
-    int deleteById( );
+    int deleteById(Long depId );
 
+    Staffinfo queryByAccId(long accId);
 }

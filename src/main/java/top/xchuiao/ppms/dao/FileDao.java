@@ -30,13 +30,7 @@ public interface FileDao {
     List<File> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
-    /**
-     * 通过实体作为筛选条件查询
-     *
-     * @param file 实例对象
-     * @return 对象列表
-     */
-    List<File> queryAll(File file);
+
 
     /**
      * 新增数据
@@ -62,4 +56,5 @@ public interface FileDao {
      */
     int deleteById(Long fileId);
 
+    List<File> queryAllPfile(long fileId);
 }

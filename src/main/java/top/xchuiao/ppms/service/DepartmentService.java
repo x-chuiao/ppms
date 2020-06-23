@@ -18,6 +18,7 @@ public interface DepartmentService {
      * @return 实例对象
      */
     Department queryById(Integer depId);
+    List<Department> queryAll();
 
     /**
      * 查询多条数据
@@ -51,5 +52,6 @@ public interface DepartmentService {
      * @return 是否成功
      */
     boolean deleteById(Integer depId);
+
 
 }

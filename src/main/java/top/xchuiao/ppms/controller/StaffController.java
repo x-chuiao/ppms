@@ -30,7 +30,7 @@ public class StaffController {
     public Responce getAllStaffs()
     {
         Responce responce=new Responce();
-        responce.data=this.staffService.queryAll();
+        responce.data=this.staffService.queryAllS();
         return responce;
     }
     @PostMapping("/staffs")

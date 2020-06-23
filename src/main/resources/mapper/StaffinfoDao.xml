@@ -20,9 +20,15 @@
         select
           dep_id, pos_id, sta_id, acc_id, sta_name, sta_age, sta_sex, sta_contact, pos_name, dep_name
         from project_procedure_ms.staffinfo
-        where  = #{}
+        where  sta_id=#{staId}
     </select>
 
+    <select id="queryByAccId" resultMap="StaffinfoMap">
+        select
+          dep_id, pos_id, sta_id, acc_id, sta_name, sta_age, sta_sex, sta_contact, pos_name, dep_name
+        from project_procedure_ms.staffinfo
+        where acc_id = #{accId}
+    </select>
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="StaffinfoMap">
         select
@@ -74,6 +80,7 @@
     <insert id="insert" keyProperty="" useGeneratedKeys="true">
         insert into project_procedure_ms.staffinfo(dep_id, pos_id, sta_id, acc_id, sta_name, sta_age, sta_sex, sta_contact, pos_name, dep_name)
         values (#{depId}, #{posId}, #{staId}, #{accId}, #{staName}, #{staAge}, #{staSex}, #{staContact}, #{posName}, #{depName})
+        where sta_id=#{staId}
     </insert>
 
     <!--通过主键修改数据-->
@@ -111,12 +118,12 @@
                 dep_name = #{depName},
             </if>
         </set>
-        where  = #{}
+        where  sta_id=#{staId}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from project_procedure_ms.staffinfo where  = #{}
+        delete from project_procedure_ms.staffinfo where  sta_id=#{staId}
     </delete>
 
 </mapper>

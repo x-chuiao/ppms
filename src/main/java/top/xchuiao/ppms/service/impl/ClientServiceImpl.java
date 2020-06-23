@@ -29,6 +29,15 @@ public class ClientServiceImpl implements ClientService {
     public Client queryById(Long cliId) {
         return this.clientDao.queryById(cliId);
     }
+    @Override
+    public List<Client> queryAll() {
+        return this.clientDao.queryAll();
+    }
+
+    @Override
+    public Client queryByAccId(Long accId) {
+        return null;
+    }
 
     /**
      * 查询多条数据

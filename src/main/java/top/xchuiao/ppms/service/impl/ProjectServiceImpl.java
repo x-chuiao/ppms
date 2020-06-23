@@ -30,6 +30,16 @@ public class ProjectServiceImpl implements ProjectService {
         return this.projectDao.queryById(proId);
     }
 
+    @Override
+    public List<Project> queryAllByProIds(List<Long> proIds) {
+        return this.projectDao.queryAllByProIds(proIds);
+    }
+
+    @Override
+    public List<Project> queryAllByCliId(Long cliId) {
+        return this.queryAllByCliId(cliId);
+    }
+
     /**
      * 查询多条数据
      *

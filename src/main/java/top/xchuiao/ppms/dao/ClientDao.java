@@ -62,4 +62,7 @@ public interface ClientDao {
      */
     int deleteById(Long cliId);
 
+    List<Client> queryAll();
+
+    public Client queryByAccId(Long accId);
 }

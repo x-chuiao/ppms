@@ -29,7 +29,7 @@ public class SubmitrecordController {
     private SubmitrecordService submitrecordService;
 
     @GetMapping("/submit-records")
-    public Responce getSubm(@RequestParam("sta_id") String id){
+    public Responce getSubm(@RequestParam("sta_id") long id){
 
         Responce responce = new Responce();
 
@@ -71,7 +71,7 @@ public class SubmitrecordController {
         return responce;
     }
     @PostMapping("/submit-reject")
-    public Responce modBhSubm(@RequestParam("id") String id, @RequestParam("director_comment") String Dcomment){
+    public Responce modBhSubm(@RequestParam("id") long id, @RequestParam("director_comment") String Dcomment){
         Responce responce = new Responce();
         Submitrecord submitrecords= submitrecordService.queryById(id);
         if(submitrecords==null)

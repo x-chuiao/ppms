@@ -2,6 +2,7 @@ package top.xchuiao.ppms.service;
 
 import top.xchuiao.ppms.entity.Projectmember;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Projectmember)表服务接口
@@ -52,4 +53,10 @@ public interface ProjectmemberService {
      */
     boolean deleteById(Long proId);
 
+    List<Projectmember> queryAll(Projectmember projectmember);
+
+    List<Projectmember> queryAllPmember(long id);
+
+    //通过depId查询proid,staId,staName
+    List<Map<String,Object>> queryAllByDepId(Long depId);
 }

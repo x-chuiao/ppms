@@ -28,14 +28,6 @@
         select
           pos_id, pos_name
         from project_procedure_ms.position
-        <where>
-            <if test="posId != null">
-                and pos_id = #{posId}
-            </if>
-            <if test="posName != null and posName != ''">
-                and pos_name = #{posName}
-            </if>
-        </where>
     </select>
 
     <!--新增所有列-->

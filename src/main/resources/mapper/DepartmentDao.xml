@@ -28,14 +28,6 @@
         select
           dep_id, dep_name
         from project_procedure_ms.department
-        <where>
-            <if test="depId != null">
-                and dep_id = #{depId}
-            </if>
-            <if test="depName != null and depName != ''">
-                and dep_name = #{depName}
-            </if>
-        </where>
     </select>
 
     <!--新增所有列-->

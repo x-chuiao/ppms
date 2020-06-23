@@ -29,7 +29,10 @@ public class PositionServiceImpl implements PositionService {
     public Position queryById(Integer posId) {
         return this.positionDao.queryById(posId);
     }
-
+    @Override
+    public List<Position> queryAll() {
+        return this.positionDao.queryAll();
+    }
     /**
      * 查询多条数据
      *

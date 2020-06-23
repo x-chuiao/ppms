@@ -21,6 +21,13 @@
         where sta_id = #{staId}
     </select>
 
+    <select id="queryAllS" resultMap="StaffMap">
+        select
+          sta_id, pos_id, dep_id, acc_id, sta_name, sta_age, sta_sex, sta_contact
+        from project_procedure_ms.staff
+
+    </select>
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="StaffMap">
         select

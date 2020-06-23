@@ -19,6 +19,10 @@ public interface ProjectService {
      */
     Project queryById(Long proId);
 
+    List<Project> queryAllByProIds(List<Long> proIds);
+
+    List<Project> queryAllByCliId( Long cliIds);
+
     /**
      * 查询多条数据
      *

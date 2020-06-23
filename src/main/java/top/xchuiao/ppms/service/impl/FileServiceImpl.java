@@ -29,7 +29,10 @@ public class FileServiceImpl implements FileService {
     public File queryById(Long fileId) {
         return this.fileDao.queryById(fileId);
     }
-
+    @Override
+    public List<File> queryAllPfile(long fileId) {
+        return this.fileDao.queryAllPfile(fileId);
+    }
     /**
      * 查询多条数据
      *

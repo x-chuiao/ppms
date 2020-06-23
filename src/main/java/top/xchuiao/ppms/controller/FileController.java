@@ -25,7 +25,7 @@ public class FileController {
     private FileService fileService;
 
     @GetMapping("/project-file")
-    public Responce getAllPfile(@RequestParam("pro_id") String id){
+    public Responce getAllPfile(@RequestParam("pro_id") long id){
 
         Responce responce = new Responce();
 

@@ -30,8 +30,8 @@ public class RoleController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public Role selectOne(String id) {
-        return this.roleService.queryById(id);
+    public Role selectOne(long id) {
+        return this.roleService.queryById((int) id);
     }
 
 }

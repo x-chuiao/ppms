@@ -22,12 +22,22 @@ public class StaffinfoServiceImpl implements StaffinfoService {
     /**
      * 通过ID查询单条数据
      *
-     * @param  主键
+//     * @param  主键
      * @return 实例对象
      */
     @Override
-    public Staffinfo queryById( ) {
+    public Staffinfo queryById() {
         return this.staffinfoDao.queryById();
+    }
+    @Override
+    public Staffinfo queryByAccId(long accId) {
+        return this.staffinfoDao.queryByAccId(accId);
+    }
+
+
+    @Override
+    public List<Staffinfo> queryAll(Staffinfo staffinfo) {
+        return this.staffinfoDao.queryAll(staffinfo);
     }
 
     /**
@@ -63,17 +73,17 @@ public class StaffinfoServiceImpl implements StaffinfoService {
     @Override
     public Staffinfo update(Staffinfo staffinfo) {
         this.staffinfoDao.update(staffinfo);
-        return this.queryById(staffinfo.get());
+        return this.queryById();
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param  主键
+//     * @param  主键
      * @return 是否成功
      */
     @Override
-    public boolean deleteById( ) {
-        return this.staffinfoDao.deleteById() > 0;
+    public boolean deleteById(Long staId) {
+        return this.staffinfoDao.deleteById(staId) > 0;
     }
 }

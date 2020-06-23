@@ -20,6 +20,11 @@ public interface ProjectDao {
      */
     Project queryById(Long proId);
 
+    List<Project> queryAllByProIds(List<Long> proIds);
+
+    List<Project> queryAllByCliId(Long cliId);
+
+
     /**
      * 查询指定行数据
      *

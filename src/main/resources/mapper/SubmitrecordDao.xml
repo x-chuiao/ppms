@@ -21,6 +21,19 @@
         where sub_id = #{subId}
     </select>
 
+    <select id="queryByStaId" resultMap="SubmitrecordMap">
+        select
+          sub_id, pro_id, sta_id, sub_intro, submit_time, director_audit, director_comment, client_comment
+        from project_procedure_ms.submitrecord
+        where director_audit = 1
+    </select>
+
+    <select id="queryByDaudit" resultMap="SubmitrecordMap">
+        select
+          sub_id, pro_id, sta_id, sub_intro, submit_time, director_audit, director_comment, client_comment
+        from project_procedure_ms.submitrecord
+        where sub_id = #{subId}
+    </select>
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SubmitrecordMap">
         select

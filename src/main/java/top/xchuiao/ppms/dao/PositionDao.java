@@ -62,4 +62,5 @@ public interface PositionDao {
      */
     int deleteById(Integer posId);
 
+    List<Position> queryAll();
 }

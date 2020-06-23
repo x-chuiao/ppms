@@ -76,4 +76,9 @@ public class StaffServiceImpl implements StaffService {
     public boolean deleteById(Long staId) {
         return this.staffDao.deleteById(staId) > 0;
     }
+
+    @Override
+    public List<Staff> queryAllS() {
+        return this.staffDao.queryAllS();
+    }
 }

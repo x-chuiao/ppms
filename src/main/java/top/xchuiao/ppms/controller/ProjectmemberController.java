@@ -35,15 +35,15 @@ public class ProjectmemberController {
     private ProjectmemberService projectmemberService;
 
     @GetMapping("/projects-member")
-    public Responce getAllProjectMember(@RequestParam("dep_id") String id){
+    public Responce getAllProjectMember(@RequestParam("dep_id") long id){
 
         Responce responce = new Responce();
 
-        List<Projectmember> projectmember= projectmemberService.queryAllPmember(id);
-        if(projectmember==null)
+        List<Map<String,Object>> projectmember= projectmemberService.queryAllByDepId(id);
+        if(projectmember.isEmpty())
         {
             responce.code="10001";
-            responce.msg="不存在此成员";
+            responce.msg="暂无项目及人员";
         }
         else
         {
@@ -53,8 +53,6 @@ public class ProjectmemberController {
     }
     @PostMapping("/projects-member")
     public Responce modAllProjectMember(@RequestParam Map<String,Object> data){
-        // add:[{"pro_id":"","id":""},{"pro_id":"","id":""}，{"pro_id":"","id":""}]
-        // del:[{"pro_id":"","id":""},{"pro_id":"","id":""}，{"pro_id":"","id":""}]
         Responce responce = new Responce();
         responce.code="10002";
         responce.msg=util.ModTable(data,this.projectmemberService, Projectmember.class,Projectmember.class);

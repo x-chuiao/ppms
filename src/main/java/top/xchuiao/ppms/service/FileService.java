@@ -52,4 +52,5 @@ public interface FileService {
      */
     boolean deleteById(Long fileId);
 
+    List<File> queryAllPfile(long fileId);
 }

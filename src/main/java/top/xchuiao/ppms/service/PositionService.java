@@ -18,7 +18,7 @@ public interface PositionService {
      * @return 实例对象
      */
     Position queryById(Integer posId);
-
+    List<Position> queryAll();
     /**
      * 查询多条数据
      *

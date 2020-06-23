@@ -1,5 +1,6 @@
 package top.xchuiao.ppms.service;
 
+import sun.rmi.runtime.Log;
 import top.xchuiao.ppms.entity.Client;
 import java.util.List;
 
@@ -52,4 +53,7 @@ public interface ClientService {
      */
     boolean deleteById(Long cliId);
 
+    Object queryAll();
+
+    Client queryByAccId(Long accId);
 }

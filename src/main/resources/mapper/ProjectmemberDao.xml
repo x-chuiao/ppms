@@ -15,6 +15,12 @@
         where pro_id = #{proId}
     </select>
 
+    <select id="queryAllByDepId" resultType="Map">
+        SELECT pc.pro_id,pc.sta_id,staff.sta_name
+        FROM `projectmember` pc JOIN staff USING(sta_id) WHERE dep_id= #{depId};
+    </select>
+
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ProjectmemberMap">
         select

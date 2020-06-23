@@ -52,4 +52,5 @@ public class Account implements Serializable {
         this.accType = accType;
     }
 
+
 }

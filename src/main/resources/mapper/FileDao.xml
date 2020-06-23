@@ -27,25 +27,13 @@
     </select>
 
     <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="FileMap">
+    <select id="queryAllPfile" resultMap="FileMap">
         select
           file_id, sub_id, file_name, file_real_name, file_type
         from project_procedure_ms.file
         <where>
             <if test="fileId != null">
                 and file_id = #{fileId}
-            </if>
-            <if test="subId != null">
-                and sub_id = #{subId}
-            </if>
-            <if test="fileName != null and fileName != ''">
-                and file_name = #{fileName}
-            </if>
-            <if test="fileRealName != null and fileRealName != ''">
-                and file_real_name = #{fileRealName}
-            </if>
-            <if test="fileType != null">
-                and file_type = #{fileType}
             </if>
         </where>
     </select>

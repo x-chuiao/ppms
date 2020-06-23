@@ -76,4 +76,14 @@ public class SubmitrecordServiceImpl implements SubmitrecordService {
     public boolean deleteById(Long subId) {
         return this.submitrecordDao.deleteById(subId) > 0;
     }
+
+    @Override
+    public List<Submitrecord> queryByStaId(long id) {
+        return this.submitrecordDao.queryByStaId(id);
+    }
+
+    @Override
+    public List<Submitrecord> queryByDaudit(int i) {
+        return this.submitrecordDao.queryByDaudit(i);
+    }
 }

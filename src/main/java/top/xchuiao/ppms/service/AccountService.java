@@ -27,7 +27,7 @@ public interface AccountService {
      * @return 对象列表
      */
     List<Account> queryAllByLimit(int offset, int limit);
-
+    List<Account> queryAll();
     /**
      * 新增数据
      *

@@ -19,7 +19,8 @@ public interface SubmitrecordDao {
      * @return 实例对象
      */
     Submitrecord queryById(Long subId);
-
+    List<Submitrecord> queryByStaId(long id);
+    List<Submitrecord> queryByDaudit(int i);
     /**
      * 查询指定行数据
      *

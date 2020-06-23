@@ -5,9 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.xchuiao.ppms.entity.*;
-import top.xchuiao.ppms.service.AccountService;
-import top.xchuiao.ppms.service.ProjectService;
-import top.xchuiao.ppms.service.ProjectmemberService;
+import top.xchuiao.ppms.service.*;
 import top.xchuiao.ppms.utils.Responce;
 import top.xchuiao.ppms.utils.util;
 
@@ -33,20 +31,30 @@ public class ProjectController {
     private AccountService accountService;
      @Resource
     private ProjectmemberService projectmemberService;
+    @Resource
+    private StaffinfoService staffinfoService;
+    @Resource
+    private ClientService clientService;
 
     @GetMapping("/projects-info")
-    public Responce getAllProject(@RequestParam String id) {
+    public Responce getAllProject(@RequestParam long acc_id) {
         Responce responce = Responce.getInstance();
-        int type=accountService.getAccountType(id);
+        int type=accountService.queryById(acc_id).getAccType();
         List<Project> projects=null;
         if(type==1)
         {
-            List<Projectmember> projectmembers= projectmemberService.queryAll(new Projectmember(){{setId(id);}});
-            projects=this.projectService.queryAll(projectmembers.stream().map(Projectmember::getProId).collect(Collectors.toList()));
+            //通过实体查询账户对应的员工
+            Staffinfo staffinfo=staffinfoService.queryAll(new Staffinfo(){{setAccId(acc_id);}}).stream().findFirst().orElse(null);
+            if(staffinfo==null)
+            {}
+
+            List<Projectmember> projectmembers= projectmemberService.queryAll(new Projectmember(){{setStaId(staffinfo.getStaId());}});
+            projects=this.projectService.queryAllByProIds(projectmembers.stream().map(Projectmember::getProId).collect(Collectors.toList()));
         }
         else if(type==2)
         {
-            projects=this.projectService.queryAll(new Project(){{setCliId(id);}});
+            Client client=clientService.queryByAccId(acc_id);
+            projects=this.projectService.queryAllByCliId(client.getCliId());
         }
         else
         {

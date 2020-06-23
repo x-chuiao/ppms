@@ -52,4 +52,7 @@ public interface SubmitrecordService {
      */
     boolean deleteById(Long subId);
 
+    List<Submitrecord> queryByStaId(long id);
+
+    List<Submitrecord> queryByDaudit(int i);
 }

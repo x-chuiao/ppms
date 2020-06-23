@@ -30,6 +30,11 @@ public class AccountServiceImpl implements AccountService {
         return this.accountDao.queryById(accId);
     }
 
+    @Override
+    public List<Account> queryAll() {
+        return this.accountDao.queryAll();
+    }
+
     /**
      * 查询多条数据
      *

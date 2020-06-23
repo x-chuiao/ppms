@@ -3,6 +3,7 @@ package top.xchuiao.ppms.dao;
 import top.xchuiao.ppms.entity.Projectmember;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Projectmember)表数据库访问层
@@ -62,4 +63,7 @@ public interface ProjectmemberDao {
      */
     int deleteById(Long proId);
 
+    List<Projectmember> queryAllPmember(long id);
+
+    List<Map<String,Object>> queryAllByDepId(Long depId);
 }

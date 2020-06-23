@@ -37,7 +37,7 @@ public interface StaffDao {
      * @return 对象列表
      */
     List<Staff> queryAll(Staff staff);
-
+    List<Staff> queryAllS();
     /**
      * 新增数据
      *
